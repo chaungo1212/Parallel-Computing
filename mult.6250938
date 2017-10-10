@@ -1,0 +1,100 @@
+echo Linux
+Linux
+icc -fopenmp -O3  mult.c tictoc.c -o mult -lm -ldl -lrt
+./mult
+omp_num_threads = 20
+start simple
+t 4.4046 Gflops 3.90044
+blocksize 4
++++++++++++++++++++++++++++++++++++++++++++
+t 25.7649 Gflops 0.666794 err 0
+t 1.67565 Gflops 10.2527 err 0 speedup 15.376
+blocksize 8
++++++++++++++++++++++++++++++++++++++++++++
+t 11.1391 Gflops 1.5423 err 0
+t 0.720729 Gflops 23.8368 err 0 speedup 15.4553
+blocksize 16
++++++++++++++++++++++++++++++++++++++++++++
+t 6.86017 Gflops 2.50429 err 0
+t 0.511806 Gflops 33.5672 err 0 speedup 13.4039
+blocksize 32
++++++++++++++++++++++++++++++++++++++++++++
+t 6.04467 Gflops 2.84215 err 0
+t 0.455785 Gflops 37.6929 err 0 speedup 13.2621
+blocksize 64
++++++++++++++++++++++++++++++++++++++++++++
+t 5.13338 Gflops 3.3467 err 0
+t 0.399033 Gflops 43.0538 err 0 speedup 12.8645
+blocksize 128
++++++++++++++++++++++++++++++++++++++++++++
+t 4.48754 Gflops 3.82835 err 0
+t 0.341825 Gflops 50.2593 err 0 speedup 13.1282
+blocksize 256
++++++++++++++++++++++++++++++++++++++++++++
+t 3.85899 Gflops 4.45191 err 0
+t 0.667537 Gflops 25.7362 err 0 speedup 5.78093
+blocksize 512
++++++++++++++++++++++++++++++++++++++++++++
+t 3.81537 Gflops 4.50281 err 0
+t 1.30217 Gflops 13.1933 err 0 speedup 2.93001
+blocksize 1024
++++++++++++++++++++++++++++++++++++++++++++
+t 3.6123 Gflops 4.75594 err 0
+t 2.60221 Gflops 6.60202 err 0 speedup 1.38816
+blocksize 2048
++++++++++++++++++++++++++++++++++++++++++++
+t 5.13359 Gflops 3.34656 err 0
+t 5.17674 Gflops 3.31867 err 0 speedup 0.991666
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@nxt2035>
+Subject: Job 6250938: <mult> in cluster <Main_Compute> Done
+
+Job <mult> was submitted from host <login2> by user <chaungo> in cluster <Main_Compute>.
+Job was executed on host(s) <20*nxt2035>, in queue <sn_short>, as user <chaungo> in cluster <Main_Compute>.
+</home/chaungo> was used as the home directory.
+</home/chaungo/project1> was used as the working directory.
+Started at Tue Oct  3 10:38:59 2017
+Results reported on Tue Oct  3 10:40:43 2017
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#BSUB -J mult                   # Set job name to 'mult'
+#BSUB -n 20                     # ask for 20 cores
+#BSUB -R "span[ptile=20]"       # ask for 20 cores per node
+#BSUB -R "rusage[mem=1024]"     # ask for a processor with at least 512MB memory
+#BSUB -M 1024                   # 1024MB per process
+#BSUB -o mult.%J                # stdout and stderr go to mult.[job id]
+#BSUB -L /bin/bash              # shell to use for the job
+#BSUB -W 45                     # 45 minute limit on run time
+
+module purge                    # remove any prior modules
+module load intel/2017A         # install Intel compiler (icc) and MKL
+# uptime
+# w
+# cat /proc/cpuinfo
+OMP_NUM_THREADS=20
+make
+
+# alternatively:
+# ./mult                        # just run the program
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   215.28 sec.
+    Max Memory :                                 191 MB
+    Average Memory :                             169.40 MB
+    Total Requested Memory :                     20480.00 MB
+    Delta Memory :                               20289.00 MB
+    Max Processes :                              6
+    Max Threads :                                25
+
+The output (if any) is above this job summary.
+
